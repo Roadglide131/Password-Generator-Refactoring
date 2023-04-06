@@ -21,6 +21,7 @@ var uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"
 var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 var symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ";", ":", "'", ",", ".", "<", ">", "/", "?", "~", "`"];
 
+// Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -30,14 +31,25 @@ function writePassword() {
 
   passwordText.value = password;
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
 }
+function generatePassword() {
+  var passwordLength = prompt("How many characters would you like your password to be? (8-128)");
+  while(passwordLength < 8 || passwordLength > 128) {
+    alert("Password must be between 8 and 128 characters");
+    var passwordLength = prompt("How many characters would you like your password to be? (8-128)");
+  }
+  var passwordLowercase = confirm("Would you like to include lowercase letters?");
+  var passwordUppercase = confirm("Would you like to include uppercase letters?");
+  var passwordNumbers = confirm("Would you like to include numbers?");
+  var passwordSymbols = confirm("Would you like to include symbols?");
+  while(passwordLowercase === false && passwordUppercase === false && passwordNumbers === false && passwordSymbols === false) {
+    alert("You must select at least one character type");
+    var passwordLowercase = confirm("Would you like to include lowercase letters?");
+    var passwordUppercase = confirm("Would you like to include uppercase letters?");
+    var passwordNumbers = confirm("Would you like to include numbers?");
+    var passwordSymbols = confirm("Would you like to include symbols?");
+  }
 
+  
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
