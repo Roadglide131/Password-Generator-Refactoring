@@ -50,6 +50,24 @@ function generatePassword() {
     var passwordSymbols = confirm("Would you like to include symbols?");
   }
 
+  var passwordCharacters = [];
+  if (passwordLowercase) {
+    passwordCharacters = passwordCharacters.concat(lowercase);
+  }
+  if (passwordUppercase) {
+    passwordCharacters = passwordCharacters.concat(uppercase);
+  }
+  if (passwordNumbers) {
+    passwordCharacters = passwordCharacters.concat(numbers);
+  }
+  if (passwordSymbols) {
+    passwordCharacters = passwordCharacters.concat(symbols);
+  }
+  var password = "";
+  for (var i = 0; i < passwordLength; i++) {
+    password = password + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+  }
+  return password;
   
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
